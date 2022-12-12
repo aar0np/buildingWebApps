@@ -33,7 +33,7 @@ jobs:
           command: mvn -B -DskipTests clean package
       # create keyspace on Cassandra
       - run: cqlsh -u $CASSANDRA_DB_USERNAME -p $CASSANDRA_DB_PASSWORD \
-             -e "CREATE KEYSPACE $CASSANDRA_DB_KEYSPACE WITH REPLICATION={'class':'NetworkTopologyStrategy','datacenter1':1};"
+             -e "CREATE KEYSPACE "$CASSANDRA_DB_KEYSPACE" WITH REPLICATION={'class':'NetworkTopologyStrategy','datacenter1':1};"
       # Then run your tests!
       - run:
           name: Test
