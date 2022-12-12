@@ -13,15 +13,16 @@ jobs:
     # A list of available CircleCI Docker Convenience Images are available here: https://circleci.com/developer/images/image/cimg/openjdk
     docker:
       - image: cimg/openjdk:17.0
-      - image: cassandra:4.0.7
         environment:
-          MAX_HEAP_SIZE: 2048m
-          HEAP_NEWSIZE: 512m
           CASSANDRA_DB_KEYSPACE: "circlecitest"
           CASSANDRA_DB_ENDPOINTS: "127.0.0.1"
           CASSANDRA_DB_DC: "datacenter1"
           CASSANDRA_DB_USERNAME: "cassandra"
           CASSANDRA_DB_PASSWORD: "cassandra"
+      - image: cassandra:4.0.7
+        environment:
+          MAX_HEAP_SIZE: 2048m
+          HEAP_NEWSIZE: 512m
     # Add steps to the job
     # See: https://circleci.com/docs/2.0/configuration-reference/#steps
     steps:
