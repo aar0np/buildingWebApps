@@ -34,8 +34,8 @@ jobs:
       # install cqlsh
       - run: pip3 install cqlsh
       # create keyspace on Cassandra
-      - run: cqlsh -u $CASSANDRA_DB_USERNAME -p $CASSANDRA_DB_PASSWORD \
-             -e "CREATE KEYSPACE "$CASSANDRA_DB_KEYSPACE" WITH REPLICATION={'class':'NetworkTopologyStrategy','"$CASSANDRA_DB_DC"':1};"
+      #- run: cqlsh -u $CASSANDRA_DB_USERNAME -p $CASSANDRA_DB_PASSWORD \
+      #       -e "CREATE KEYSPACE "$CASSANDRA_DB_KEYSPACE" WITH REPLICATION={'class':'NetworkTopologyStrategy','"$CASSANDRA_DB_DC"':1};"
       # Then run your tests!
       - run:
           name: Test
