@@ -35,7 +35,7 @@ jobs:
             sudo apt update
             sudo apt install cassandra
             sudo systemctl status cassandra
-            nodetool status
+            sudo nodetool status
 
       # Use mvn clean and package as the standard maven build phase
       - run:
