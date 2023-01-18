@@ -11,23 +11,32 @@ jobs:
     # You can specify an image from Dockerhub or use one of our Convenience Images from CircleCI's Developer Hub.
     # Be sure to update the Docker image tag below to openjdk version of your application.
     # A list of available CircleCI Docker Convenience Images are available here: https://circleci.com/developer/images/image/cimg/openjdk
-    docker:
-      - image: cimg/openjdk:17.0
+    machine:
+      image: ubuntu-2004:202101-01
         environment:
           CASSANDRA_DB_KEYSPACE: "circlecitest"
           CASSANDRA_DB_ENDPOINTS: "127.0.0.1"
           CASSANDRA_DB_DC: "datacenter1"
           CASSANDRA_DB_USERNAME: "cassandra"
           CASSANDRA_DB_PASSWORD: "cassandra"
-      - image: cassandra:4.0.7
-        environment:
-          MAX_HEAP_SIZE: 2048m
+          MAX_HEAP_SIZE: 1024m
           HEAP_NEWSIZE: 512m
     # Add steps to the job
     # See: https://circleci.com/docs/2.0/configuration-reference/#steps
     steps:
       # Checkout the code as the first step.
       - checkout
+
+      - run:
+          name: install
+          command: |
+            curl https://downloads.apache.org/cassandra/KEYS | sudo apt-key add -
+            echo "deb https://downloads.apache.org/cassandra/debian 40x main" | sudo tee -a /etc/apt/sources.list.d/cassandra.sources.list
+            sudo apt update
+            sudo apt install cassandra
+            sudo systemctl status cassandra
+            nodetool status
+
       # Use mvn clean and package as the standard maven build phase
       - run:
           name: Build
